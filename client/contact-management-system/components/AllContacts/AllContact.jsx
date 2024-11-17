@@ -7,7 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import { Button } from '@mui/material';
+import { Button, Stack, Typography } from '@mui/material';
 
 
 const columns = [
@@ -20,25 +20,20 @@ const columns = [
     { id: 'actions', label: 'Actions', minWidth: '170', align: 'center' }
 ]
 
-const rows = [
-    { firstName: 'Satya', lastName: 'Sahu', email: 'satya@gmail.com', phone: '7205210531', company: 'none', job: 'none' },
-    { firstName: 'Satya', lastName: 'Sahu', email: 'satya@gmail.com', phone: '7205210532', company: 'none', job: 'none' },
-    { firstName: 'Satya', lastName: 'Sahu', email: 'satya@gmail.com', phone: '7205210533', company: 'none', job: 'none' },
-    { firstName: 'Satya', lastName: 'Sahu', email: 'satya@gmail.com', phone: '7205210534', company: 'none', job: 'none' },
-    { firstName: 'Satya', lastName: 'Sahu', email: 'satya@gmail.com', phone: '7205210535', company: 'none', job: 'none' },
-    { firstName: 'Satya', lastName: 'Sahu', email: 'satya@gmail.com', phone: '7205210536', company: 'none', job: 'none' },
-    { firstName: 'Satya', lastName: 'Sahu', email: 'satya@gmail.com', phone: '7205210537', company: 'none', job: 'none' },
-    { firstName: 'Satya', lastName: 'Sahu', email: 'satya@gmail.com', phone: '7205210538', company: 'none', job: 'none' },
-    { firstName: 'Satya', lastName: 'Sahu', email: 'satya@gmail.com', phone: '7205210539', company: 'none', job: 'none' },
-    { firstName: 'Satya', lastName: 'Sahu', email: 'satya@gmail.com', phone: '7205210530', company: 'none', job: 'none' },
-    { firstName: 'Satya', lastName: 'Sahu', email: 'satya@gmail.com', phone: '7205210521', company: 'none', job: 'none' },
-    { firstName: 'Satya', lastName: 'Sahu', email: 'satya@gmail.com', phone: '7205210523', company: 'none', job: 'none' },
-    { firstName: 'Satya', lastName: 'Sahu', email: 'satya@gmail.com', phone: '7205210585', company: 'none', job: 'none' }
-]
-
 const AllContact = () => {
     const [page, setPage] = React.useState(0)
     const [rowsPerPage, setRowsPerPage] = React.useState(8)
+    const [contacts, setContacts] = React.useState([])
+    React.useEffect(() => {
+      const fetchData = async () => {
+        const response = await fetch('http://localhost:3300/contacts')
+        const data = await response.json();
+        setContacts(data.contacts);
+      }
+      fetchData()
+    }, [])
+    
+    const rows = contacts
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -50,18 +45,21 @@ const AllContact = () => {
     };
 
     return (
-        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+        <Paper sx={{ width: '100%', overflow: 'hidden', padding: '1.5rem' }}>
             <TableContainer sx={{ maxHeight: '440' }}>
                 <Table stickyHeader aria-label="sticky table">
-                    <TableHead sx={{ backgroundColor: 'black', color: 'white' }}>
+                    <TableHead>
                         <TableRow>
                             {columns.map((column) => (
                                 <TableCell
                                     key={column.id}
                                     align={column.align}
-                                    style={{ minWidth: column.minWidth }}
+                                    color='#6A42C2'
+                                    style={{ minWidth: column.minWidth, backgroundColor: '#8B5DFF' }}
                                 >
-                                    {column.label}
+                                    <Typography variant='subtitle1' component='span' color='#3B1E54' sx={{ fontWeight: 'bold', textAlign: 'center' }}>
+                                        {column.label}
+                                    </Typography>
                                 </TableCell>
                             ))}
                         </TableRow>
@@ -77,10 +75,10 @@ const AllContact = () => {
                                             return (
                                                 <TableCell key={column.id} align={column.align}>
                                                     {column.id === 'actions' ? (
-                                                        <>
-                                                            <Button>Edit</Button>
-                                                            <Button>Delete</Button>
-                                                        </>
+                                                        <Stack spacing={1} justifyContent='center' direction='row'>
+                                                            <Button variant='contained'>Edit</Button>
+                                                            <Button variant='contained'>Delete</Button>
+                                                        </Stack >
                                                     ) : (
                                                         value
                                                     )}

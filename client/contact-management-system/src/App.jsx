@@ -1,14 +1,20 @@
-// import AllContact from '../components/AllContacts/AllContact'
+// import React from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import AllContact from '../components/AllContacts/AllContact'
+import AddContact from '../components/AddContact/AddContact'
 import './App.css'
-// import AddContact from '../components/AddContact/AddContact'
 
 function App() {
 
   return (
     <>
-      <div className="main-container">
-        {/* <AddContact></AddContact> */}
-        {/* <AllContact></AllContact> */}
+      <div className="container">
+        <Router>
+          <Routes>
+            <Route path='/' element={<AllContact />} />
+            <Route path='/contacts' element={<AddContact />} />
+          </Routes>
+        </Router>
       </div>
     </>
   )
