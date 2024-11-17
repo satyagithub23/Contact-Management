@@ -1,0 +1,18 @@
+.contact-form-main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-form-main-container .outlined-card {
+    width: 100%;
+    min-width: 500px;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid rgb(0, 132, 255);
+}
+
+.contact-form-main-container .content-card > * {
+    margin-bottom: 1.3rem;
+}

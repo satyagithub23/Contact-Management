@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/satyagithub23/Contact-Management/issues"
   },
-  "homepage": "https://github.com/satyagithub23/Contact-Management#readme"
+  "homepage": "https://github.com/satyagithub23/Contact-Management#readme",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "express": "^4.21.1",
+    "mongoose": "^8.8.1"
+  }
 }
